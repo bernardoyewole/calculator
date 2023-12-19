@@ -13,8 +13,6 @@ const divideBtn = select('.divide');
 const multiplyBtn = select('.multiply');
 const minusBtn = select('.minus');
 const plusBtn = select('.plus');
-// const period = select('.period');
-
 
 operands.forEach(operand => {
     onEvent('click', operand, () => {
@@ -23,7 +21,7 @@ operands.forEach(operand => {
 });
 
 function isValid(str) {
-    if (str.match(/^[0-9.]+$/) && str.value !== '') {
+    if (str.match(/^-?\d*\.?\d+$/) && str.value !== '') {
         return true;
     } else {
         return false
@@ -72,6 +70,7 @@ function minus(a, b) {
 
 let count = 0;
 let btns = [minusBtn, plusBtn, multiplyBtn, divideBtn];
+
 btns.forEach(btn => {
     onEvent('click', btn, () =>{
         count++;
@@ -149,7 +148,7 @@ onEvent('click', equalsBtn, () => {
         return;
     }
 
-    if (isValid(input.value)) {
+    if (isValid(input.value) && operandOne !== undefined) {
         count = 0;
         operandTwo = parseFloat(input.value);
         handleOperations();
