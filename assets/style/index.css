@@ -25,15 +25,15 @@ main {
 }
 
 .calculator {
-    width: 326px;
+    width: 363px;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 80px); 
+    grid-template-columns: repeat(4, 90px); 
     grid-template-rows: repeat(5, 80px);
-    gap: 2px;
-    width: 100%;
+    gap: 1px;
+    width: 100%; 
 }
 
 .grid-container div {
@@ -43,16 +43,16 @@ main {
     cursor: pointer;
 }
 
-.grid-container div:not(.equal) {
+.grid-container div:not(.equals) {
     color: #46616E;
 }
 
-.grid-container div:not(.action):not(.equal) {
+.grid-container div:not(.action):not(.equals) {
     background-color: #fff;
     transition: all 0.25s ease-in-out;
 }
 
-.grid-container div:not(.action):not(.equal):hover {
+.grid-container div:not(.action):not(.equals):hover {
     background-color: #cdd7da;
 }
 
@@ -69,13 +69,13 @@ main {
     grid-column: span 2;
 }
 
-.equal {
+.equals {
     background-color: #ff6567;
     color: #fff;
     transition: all 0.25s ease-in-out;
 }
 
-.equal:hover {
+.equals:hover {
     background-color: #ff5154;
 }
 
@@ -105,11 +105,11 @@ main {
     height: 24px;
 }
 
-.operations, .result {
+.operations {
     color: #fff;
-    font-size: 22px;
+    font-size: 36px;
 }
 
-/* .multiply {
-    visibility: hidden;
-} */
+.memory {
+    color: #d3d4d6;
+}
