@@ -33,6 +33,10 @@ function isValid(str) {
 onEvent('click', reset, () => {
     input.value = '';
     memory.innerText = '';
+    operandOne = '';
+    operandTwo = '';
+    currentOperator = '';
+    repeatOperation = false;
 });
 
 onEvent('click', backspace, () => {
@@ -73,6 +77,7 @@ let operandTwo;
 
 onEvent('click', divideBtn, () => {
     if (isValid(input.value)) {
+        repeatOperation = false;
         currentOperator = '/';
         operandOne = parseFloat(input.value);
         input.value = '';
@@ -81,6 +86,7 @@ onEvent('click', divideBtn, () => {
 
 onEvent('click', multiplyBtn, () => {
     if (isValid(input.value)) {
+        repeatOperation = false;
         currentOperator = '*';
         operandOne = parseFloat(input.value);
         input.value = '';
@@ -89,6 +95,7 @@ onEvent('click', multiplyBtn, () => {
 
 onEvent('click', minusBtn, () => {
     if (isValid(input.value)) {
+        repeatOperation = false;
         currentOperator = '-';
         operandOne = parseFloat(input.value);
         input.value = '';
@@ -97,18 +104,32 @@ onEvent('click', minusBtn, () => {
 
 onEvent('click', plusBtn, () => {
     if (isValid(input.value)) {
+        repeatOperation = false;
         currentOperator = '+';
         operandOne = parseFloat(input.value);
         input.value = '';
     }
 });
 
+let repeatOperation = false;
+
+function handleOperations() {
+    let index = operatorsArr.indexOf(currentOperator);
+    let result = functionsArr[index](operandOne, operandTwo);
+    memory.innerText = `${operandOne} ${operatorsArr[index]} ${operandTwo} =`
+    input.value = result;
+}
+
 onEvent('click', equalsBtn, () => {
+    if (repeatOperation) {
+        operandOne = parseFloat(input.value);
+        handleOperations();
+        return;
+    }
+
     if (isValid(input.value)) {
         operandTwo = parseFloat(input.value);
-        let index = operatorsArr.indexOf(currentOperator);
-        let result = functionsArr[index](operandOne, operandTwo);
-        memory.innerText = `${operandOne} ${operatorsArr[index]} ${operandTwo} =`
-        input.value = result;
+        handleOperations();
+        repeatOperation = true;
     }
 })
