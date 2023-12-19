@@ -154,4 +154,4 @@ onEvent('click', equalsBtn, () => {
         handleOperations();
         repeatOperation = true;
     }
-})
+});

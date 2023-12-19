@@ -36,7 +36,7 @@ main {
     width: 100%; 
 }
 
-.grid-container div {
+.grid-container div:not(.percent) {
     line-height: 80px;
     text-align: center;
     font-size: 20px;
@@ -80,8 +80,11 @@ main {
 }
 
 .percent {
-    font-weight: 800;
-    font-size: 18px;
+    line-height: 80px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 23px;
+    cursor: pointer;
 }
 
 .operation-box {
