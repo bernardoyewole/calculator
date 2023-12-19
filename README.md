@@ -15,5 +15,5 @@ Click [here](https://bernardoyewole.github.io/calculator/) to check it out.
 A demo is show below:
 
 <p align='center'>
-<img src='./assets/img/calculator.png' height='400px' width='450px'>
+<img src='./assets/img/calculator.png'>
 </p>
