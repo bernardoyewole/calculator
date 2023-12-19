@@ -11,7 +11,7 @@ const equalsBtn = select('.equals');
 const percentBtn = select('.percent');
 const divideBtn = select('.divide');
 const multiplyBtn = select('.multiply');
-const minusBtn = select('.multiply');
+const minusBtn = select('.minus');
 const plusBtn = select('.plus');
 const period = select('.period');
 
@@ -49,9 +49,66 @@ onEvent('click', percentBtn, () => {
     }
 })
 
+function divide(a, b) {
+    return a / b;
+}
 
-// onEvent('click', equals, () => {
-//     if (input.value != '') {
-        
-//     }
-// })
+function multiply(a, b) {
+    return a * b;
+}
+
+function add(a, b) {
+    return a + b;
+}
+
+function minus(a, b) {
+    return a - b;
+}
+
+let functionsArr = [divide, multiply, add, minus];
+let operatorsArr = ['/', '*', '+', '-'];
+let currentOperator;
+let operandOne;
+let operandTwo;
+
+onEvent('click', divideBtn, () => {
+    if (isValid(input.value)) {
+        currentOperator = '/';
+        operandOne = parseFloat(input.value);
+        input.value = '';
+    }
+});
+
+onEvent('click', multiplyBtn, () => {
+    if (isValid(input.value)) {
+        currentOperator = '*';
+        operandOne = parseFloat(input.value);
+        input.value = '';
+    }
+});
+
+onEvent('click', minusBtn, () => {
+    if (isValid(input.value)) {
+        currentOperator = '-';
+        operandOne = parseFloat(input.value);
+        input.value = '';
+    }
+});
+
+onEvent('click', plusBtn, () => {
+    if (isValid(input.value)) {
+        currentOperator = '+';
+        operandOne = parseFloat(input.value);
+        input.value = '';
+    }
+});
+
+onEvent('click', equalsBtn, () => {
+    if (isValid(input.value)) {
+        operandTwo = parseFloat(input.value);
+        let index = operatorsArr.indexOf(currentOperator);
+        let result = functionsArr[index](operandOne, operandTwo);
+        memory.innerText = `${operandOne} ${operatorsArr[index]} ${operandTwo} =`
+        input.value = result;
+    }
+})
