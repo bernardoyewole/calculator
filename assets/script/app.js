@@ -13,7 +13,7 @@ const divideBtn = select('.divide');
 const multiplyBtn = select('.multiply');
 const minusBtn = select('.minus');
 const plusBtn = select('.plus');
-const period = select('.period');
+// const period = select('.period');
 
 
 operands.forEach(operand => {
@@ -37,6 +37,7 @@ onEvent('click', reset, () => {
     operandTwo = '';
     currentOperator = '';
     repeatOperation = false;
+    count = 0;
 });
 
 onEvent('click', backspace, () => {
@@ -48,7 +49,7 @@ onEvent('click', percentBtn, () => {
     if (isValid(input.value)) {
         memory.innerText = `${input.value}%`;
         let num = parseFloat(input.value);
-        let result = num / 100;
+        result = num / 100;
         input.value = result;
     }
 })
@@ -69,14 +70,32 @@ function minus(a, b) {
     return a - b;
 }
 
+let count = 0;
+let btns = [minusBtn, plusBtn, multiplyBtn, divideBtn];
+btns.forEach(btn => {
+    onEvent('click', btn, () =>{
+        count++;
+    })
+});
+
+function multipleOperands() {
+    if (count > 1) {
+        operandTwo = parseFloat(input.value);
+        handleOperations();
+        memory.innerText = result;
+    }
+}
+
 let functionsArr = [divide, multiply, add, minus];
 let operatorsArr = ['/', '*', '+', '-'];
 let currentOperator;
 let operandOne;
 let operandTwo;
+let result;
 
 onEvent('click', divideBtn, () => {
     if (isValid(input.value)) {
+        multipleOperands();
         repeatOperation = false;
         currentOperator = '/';
         operandOne = parseFloat(input.value);
@@ -86,6 +105,7 @@ onEvent('click', divideBtn, () => {
 
 onEvent('click', multiplyBtn, () => {
     if (isValid(input.value)) {
+        multipleOperands();
         repeatOperation = false;
         currentOperator = '*';
         operandOne = parseFloat(input.value);
@@ -95,6 +115,7 @@ onEvent('click', multiplyBtn, () => {
 
 onEvent('click', minusBtn, () => {
     if (isValid(input.value)) {
+        multipleOperands();
         repeatOperation = false;
         currentOperator = '-';
         operandOne = parseFloat(input.value);
@@ -104,6 +125,7 @@ onEvent('click', minusBtn, () => {
 
 onEvent('click', plusBtn, () => {
     if (isValid(input.value)) {
+        multipleOperands();
         repeatOperation = false;
         currentOperator = '+';
         operandOne = parseFloat(input.value);
@@ -115,7 +137,7 @@ let repeatOperation = false;
 
 function handleOperations() {
     let index = operatorsArr.indexOf(currentOperator);
-    let result = functionsArr[index](operandOne, operandTwo);
+    result = functionsArr[index](operandOne, operandTwo);
     memory.innerText = `${operandOne} ${operatorsArr[index]} ${operandTwo} =`
     input.value = result;
 }
@@ -128,6 +150,7 @@ onEvent('click', equalsBtn, () => {
     }
 
     if (isValid(input.value)) {
+        count = 0;
         operandTwo = parseFloat(input.value);
         handleOperations();
         repeatOperation = true;
