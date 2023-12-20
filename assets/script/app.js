@@ -137,6 +137,7 @@ let repeatOperation = false;
 function handleOperations() {
     let index = operatorsArr.indexOf(currentOperator);
     result = functionsArr[index](operandOne, operandTwo);
+    if (result.toString().length > 14) result = result.toFixed(12);
     memory.innerText = `${operandOne} ${operatorsArr[index]} ${operandTwo} =`
     input.value = result;
 }

@@ -49,7 +49,7 @@ main {
 
 .grid-container div:not(.action):not(.equals) {
     background-color: #fff;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .grid-container div:not(.action):not(.equals):hover {
@@ -58,7 +58,7 @@ main {
 
 .action {
     background-color: #e4e9eb;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .action:hover {
